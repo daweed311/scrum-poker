@@ -20,9 +20,9 @@ module.exports = {
   // CORS configuration for different environments
   CORS_ORIGIN: isDevelopment 
     ? ['http://localhost:5173', 'http://localhost:3000'] 
-    : ['https://scrum-poker-9c6i.onrender.com', 'https://scrum-poker-game.netlify.app/'],
+    : ['https://scrum-poker-9c6i.onrender.com', 'https://scrum-poker-game.netlify.app'],
   // Frontend URL for different environments
   FRONTEND_URL: isDevelopment 
     ? 'http://localhost:5173' 
-    : 'https://scrum-poker-9c6i.onrender.com'
+    : 'https://scrum-poker-game.netlify.app'
 }; 

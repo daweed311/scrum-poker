@@ -24,13 +24,36 @@ const io = socketIo(server, {
 // Connect to MongoDB
 connectDB();
 
+// CORS debugging middleware
+app.use((req, res, next) => {
+  console.log(`🌐 ${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
+
 // Middleware with environment-based CORS
 app.use(cors({
-  origin: config.CORS_ORIGIN,
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (config.CORS_ORIGIN.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log(`🚫 CORS blocked origin: ${origin}`);
+      console.log(`✅ Allowed origins: ${config.CORS_ORIGIN.join(', ')}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Handle CORS preflight requests
+app.options('*', cors());
 
 // Routes
 app.use('/api/rooms', roomRoutes);
