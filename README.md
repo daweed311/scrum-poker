@@ -110,6 +110,27 @@ npm run dev   # Starts the React app on localhost:5173 (default)
 
 ### Frontend Deployment
 
+#### Option 1: Netlify (Recommended)
+
+1. **Connect to Netlify:**
+   - Go to [Netlify](https://netlify.com) and sign in
+   - Click "New site from Git"
+   - Connect your GitHub repository
+
+2. **Configure the build settings:**
+   - **Base directory:** `frontend`
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+
+3. **Environment Variables** (Optional - now automatic):
+   - The frontend automatically detects the environment and uses the correct backend URL
+   - For development: `http://localhost:3001`
+   - For production: `https://scrum-poker-9c6i.onrender.com`
+
+4. **Deploy** - Netlify will build and deploy your frontend
+
+#### Option 2: Render Static Site
+
 1. **Create a new Static Site** on Render
 2. **Connect your GitHub repository**
 3. **Configure the service:**
@@ -143,7 +164,7 @@ Based on [Render's environment variables documentation](https://render.com/docs/
 - The frontend automatically detects the environment using `import.meta.env.DEV`
 - No manual environment variable setup required
 - Development: Uses `http://localhost:3001`
-- Production: Uses `https://scrum-poker-9c6i.onrender.com`
+- Production: Uses `https://scrum-poker-9c6i.onrender.com` (works with both Netlify and Render frontend)
 
 ---
 
@@ -167,7 +188,9 @@ Based on [Render's environment variables documentation](https://render.com/docs/
 ## Tech Stack
 - **Frontend:** React, TypeScript, Vite, Emotion, Socket.io-client, Axios
 - **Backend:** Node.js, Express, Socket.io, Mongoose, MongoDB
-- **Deployment:** Render (Backend: Web Service, Frontend: Static Site)
+- **Deployment:** 
+  - Backend: Render (Web Service)
+  - Frontend: Netlify (Static Site) or Render (Static Site)
 
 ---
 
