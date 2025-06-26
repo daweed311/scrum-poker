@@ -14,6 +14,19 @@ export const VotingPanelContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 1rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      background: var(--border-secondary);
+      border-radius: 2px;
+      opacity: 0.6;
+    }
   }
 `;
 
@@ -89,13 +102,25 @@ export const VotingCardsGrid = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 0.5rem;
+    padding: 0.5rem 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
     gap: 0.375rem;
+    padding: 0.375rem 0;
   }
 `;
 

@@ -60,6 +60,8 @@ export const CardContainer = styled.div<{
     width: 50px;
     height: 70px;
     border-radius: 6px;
+    flex-shrink: 0;
+    scroll-snap-align: center;
   }
 
   @media (max-width: 480px) {
