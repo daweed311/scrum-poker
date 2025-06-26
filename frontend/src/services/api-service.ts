@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// Use environment variable for API URL, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Environment-based API URL configuration
+const isDevelopment = import.meta.env.DEV;
+const API_BASE_URL = isDevelopment 
+  ? 'http://localhost:3001' 
+  : 'https://scrum-poker-9c6i.onrender.com';
 
 export interface CreateRoomData {
   name: string;

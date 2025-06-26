@@ -1,8 +1,11 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-// Use environment variable for socket URL, fallback to localhost for development
-const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Environment-based socket URL configuration
+const isDevelopment = import.meta.env.DEV;
+const SOCKET_URL = isDevelopment 
+  ? 'http://localhost:3001' 
+  : 'https://scrum-poker-9c6i.onrender.com';
 
 interface VoteData {
   userId: string;

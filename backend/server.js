@@ -12,19 +12,23 @@ const Room = require('./models/Room');
 const app = express();
 const server = http.createServer(app);
 
-// Initialize Socket.io
+// Initialize Socket.io with environment-based CORS
 const io = socketIo(server, {
   cors: {
-    origin: "*", // In production, specify your frontend URL
-    methods: ["GET", "POST"]
+    origin: config.CORS_ORIGIN,
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 // Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors());
+// Middleware with environment-based CORS
+app.use(cors({
+  origin: config.CORS_ORIGIN,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

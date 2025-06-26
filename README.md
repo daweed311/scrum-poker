@@ -118,38 +118,32 @@ npm run dev   # Starts the React app on localhost:5173 (default)
    - **Build Command:** `npm install && npm run build`
    - **Publish Directory:** `dist`
 
-4. **Set Environment Variables** (if needed for API endpoints):
-   - `VITE_API_URL` = `https://your-backend-service.onrender.com`
+4. **Environment Variables** (Optional - now automatic):
+   - The frontend automatically detects the environment and uses the correct backend URL
+   - For development: `http://localhost:3001`
+   - For production: `https://scrum-poker-9c6i.onrender.com`
 
 5. **Deploy** - Render will build and deploy your frontend
 
 ### Environment Variables Setup
 
-Based on [Render's environment variables documentation](https://render.com/docs/configure-environment-variables), you can set environment variables in three ways:
+Based on [Render's environment variables documentation](https://render.com/docs/configure-environment-variables), you only need to set environment variables for the **backend service**:
 
-#### Option 1: Render Dashboard (Recommended)
-1. Go to your service → **Environment** tab
+#### Backend Environment Variables (Required)
+1. Go to your backend service → **Environment** tab
 2. Click **+ Add Environment Variable**
-3. Add each variable with its value
-4. Click **Save, rebuild, and deploy**
+3. Add the following variables:
 
-#### Option 2: Bulk Import from .env file
-1. Create a `.env` file locally with your variables
-2. In Render Dashboard → **Environment** tab
-3. Click **Add from .env**
-4. Upload your `.env` file
+| Key | Value | Description |
+|-----|-------|-------------|
+| `MONGODB_URI` | `your_mongodb_connection_string` | Your MongoDB connection string |
+| `NODE_ENV` | `production` | Environment setting |
 
-#### Option 3: Blueprint (render.yaml)
-```yaml
-services:
-  - type: web
-    name: scrum-poker-backend
-    envVars:
-      - key: MONGODB_URI
-        sync: false  # Set this manually in dashboard
-      - key: NODE_ENV
-        value: production
-```
+#### Frontend Environment Variables (Automatic)
+- The frontend automatically detects the environment using `import.meta.env.DEV`
+- No manual environment variable setup required
+- Development: Uses `http://localhost:3001`
+- Production: Uses `https://scrum-poker-9c6i.onrender.com`
 
 ---
 
