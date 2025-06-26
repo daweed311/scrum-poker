@@ -95,8 +95,14 @@ export const useSocket = (roomId: string, userId: string, username: string): Use
 
     // Create socket connection
     const socket = io(SOCKET_URL, {
-      transports: ['websocket'],
+      transports: ['polling', 'websocket'], // Start with polling for mobile compatibility
       autoConnect: true,
+      timeout: 20000, // Increase timeout for mobile
+      forceNew: true, // Force new connection
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000
     });
 
     socketRef.current = socket;
@@ -118,6 +124,22 @@ export const useSocket = (roomId: string, userId: string, username: string): Use
 
     socket.on('connect_error', (error) => {
       console.error('🔴 Connection error:', error);
+      console.log('📱 Mobile debugging - User agent:', navigator.userAgent);
+      console.log('📱 Mobile debugging - Connection type:', (navigator as any).connection?.effectiveType || 'unknown');
+    });
+
+    socket.on('connect_timeout', () => {
+      console.error('⏰ Connection timeout - common on mobile networks');
+    });
+
+    socket.on('reconnect_attempt', (attemptNumber) => {
+      console.log(`🔄 Reconnection attempt ${attemptNumber}/5`);
+    });
+
+    socket.on('reconnect_failed', () => {
+      console.error('❌ Reconnection failed - switching to polling only');
+      // Force polling transport for mobile
+      socket.io.opts.transports = ['polling'];
     });
 
     // Check if already connected

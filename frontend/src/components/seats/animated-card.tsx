@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CardContainer, CardFront, CardBack } from "./index.styled";
-
+import { Text } from "../typography";
 interface AnimatedCardProps {
   value: string | number | null;
   isRevealed: boolean;
@@ -58,7 +58,7 @@ export const AnimatedCard = ({
         {voted ? "?" : ""}
       </CardFront>
       <CardBack id="back" isCurrentUser={isCurrentUser}>
-        {value}
+        <Text>{value}</Text>
       </CardBack>
     </CardContainer>
   );
