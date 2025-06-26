@@ -10,12 +10,38 @@ A real-time Scrum Poker (Planning Poker) application for agile teams to estimate
 
 ## Features
 - Real-time voting and updates using WebSockets
-- Create and join rooms for estimation sessions
-- Modern, responsive UI
+- Create and join rooms for estimation sessions (up to 10 participants)
+- Modern, responsive UI optimized for both desktop and mobile
+- Cross-platform compatibility with intuitive UX design
 - Persistent data storage with MongoDB
 - Easy to set up and run locally
 - Ready for Render deployment
 - Mobile-friendly with polling fallback
+
+---
+
+## UI/UX Features
+
+### 🖥️ **Desktop Experience**
+- **Responsive design** that adapts to different screen sizes
+- **Intuitive card-based interface** for easy voting
+- **Real-time updates** with smooth animations
+- **Keyboard shortcuts** for power users
+- **Clean, modern interface** with dark/light theme support
+
+### 📱 **Mobile Experience**
+- **Touch-optimized** interface for mobile devices
+- **Responsive layout** that works on all screen sizes
+- **Mobile-specific navigation** and interactions
+- **WebSocket fallback** to polling for better mobile connectivity
+- **Fast loading** and smooth performance on mobile networks
+
+### 👥 **Team Collaboration**
+- **Up to 10 participants** per room
+- **Real-time synchronization** across all devices
+- **Visual feedback** for voting status
+- **Room management** with easy join/leave functionality
+- **Cross-platform compatibility** - works on any device
 
 ---
 
