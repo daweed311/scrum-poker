@@ -2,6 +2,8 @@
 
 A real-time Scrum Poker (Planning Poker) application for agile teams to estimate tasks collaboratively. Built with a modern React frontend and Node.js/Express backend, using WebSockets for real-time updates.
 
+🌐 **Live Demo:** [https://scrum-poker-game.netlify.app/](https://scrum-poker-game.netlify.app/)
+
 ![Logo](frontend/public/logo.svg)
 
 ---
@@ -13,6 +15,7 @@ A real-time Scrum Poker (Planning Poker) application for agile teams to estimate
 - Persistent data storage with MongoDB
 - Easy to set up and run locally
 - Ready for Render deployment
+- Mobile-friendly with polling fallback
 
 ---
 
@@ -46,7 +49,7 @@ A real-time Scrum Poker (Planning Poker) application for agile teams to estimate
 
 ---
 
-## Setup Instructions
+## Quick Start
 
 ### Local Development
 
@@ -115,7 +118,7 @@ npm run dev   # Starts the React app on localhost:5173 (default)
 1. **Connect to Netlify:**
    - Go to [Netlify](https://netlify.com) and sign in
    - Click "New site from Git"
-   - Connect your GitHub repository
+   - Choose GitHub and select your repository
 
 2. **Configure the build settings:**
    - **Base directory:** `frontend`
@@ -146,7 +149,9 @@ npm run dev   # Starts the React app on localhost:5173 (default)
 
 5. **Deploy** - Render will build and deploy your frontend
 
-### Environment Variables Setup
+---
+
+## Environment Variables Setup
 
 Based on [Render's environment variables documentation](https://render.com/docs/configure-environment-variables), you only need to set environment variables for the **backend service**:
 
