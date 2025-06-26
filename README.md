@@ -104,12 +104,21 @@ npm run dev   # Starts React app at http://localhost:5173
 
 ## 📸 Screenshots
 
-*Add screenshots or GIFs here to showcase the app interface:*
+### 🖥️ Desktop View
 
-```md
-![Lobby Screenshot](path/to/lobby-screenshot.png)
-![Room Screenshot](path/to/room-screenshot.png)
-```
+<div style="display:flex; gap:1rem; flex-wrap: wrap; justify-content: center;">
+  <img src="frontend/public/screenshot-pc-light.jpg" alt="Desktop Light Theme" style="width:300px; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+  <img src="frontend/public/screenshot-pc-dark.jpg" alt="Desktop Dark Theme" style="width:300px; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+</div>
+
+---
+
+### 📱 Mobile View
+
+<div style="display:flex; gap:1rem; flex-wrap: wrap; justify-content: center;">
+  <img src="frontend/public/screenshot-mob-light.jpg" alt="Mobile Light Theme" style="width:160px; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+  <img src="frontend/public/screenshot-mob-dark.jpg" alt="Mobile Dark Theme" style="width:160px; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+</div>
 
 ---
 
@@ -119,30 +128,6 @@ npm run dev   # Starts React app at http://localhost:5173
 * **Backend:** Node.js, Express, Socket.io, Mongoose, MongoDB
 * **Deployment-Ready For:** Netlify (Frontend) + Render (Backend)
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! To get started:
-
-```bash
-# 1. Fork the repo
-# 2. Create a new branch
-git checkout -b feature/your-feature
-
-# 3. Make your changes
-git commit -am "Add feature"
-
-# 4. Push and open a pull request
-git push origin feature/your-feature
-```
-
----
-
 ## 📄 License
 
 MIT License. See [LICENSE](LICENSE) for full details.
-
----
-
-Let me know if you'd like a version with badges, shortened sections, or added visuals.
