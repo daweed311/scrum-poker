@@ -164,7 +164,9 @@ Based on [Render's environment variables documentation](https://render.com/docs/
 - The frontend automatically detects the environment using `import.meta.env.DEV`
 - No manual environment variable setup required
 - Development: Uses `http://localhost:3001`
-- Production: Uses relative URLs with Netlify proxy to avoid CORS issues
+- Production: 
+  - API calls use relative URLs with Netlify proxy to avoid CORS issues
+  - WebSocket connections go directly to Render backend (Netlify doesn't proxy WebSockets)
 
 ---
 

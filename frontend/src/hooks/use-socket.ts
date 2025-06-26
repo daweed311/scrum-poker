@@ -5,7 +5,7 @@ import { io, Socket } from 'socket.io-client';
 const isDevelopment = import.meta.env.DEV;
 const SOCKET_URL = isDevelopment 
   ? 'http://localhost:3001' 
-  : ''; // Use relative URLs in production to leverage Netlify proxy
+  : 'https://scrum-poker-9c6i.onrender.com'; // Direct connection for WebSocket (Netlify doesn't proxy WebSockets)
 
 interface VoteData {
   userId: string;

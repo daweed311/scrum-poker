@@ -16,9 +16,11 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: config.CORS_ORIGIN,
-    methods: ["GET", "POST"],
-    credentials: true
-  }
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
+  },
+  transports: ['websocket', 'polling']
 });
 
 // Connect to MongoDB
@@ -54,6 +56,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Handle CORS preflight requests
 app.options('*', cors());
+
+// Handle WebSocket upgrade requests
+app.use('/socket.io/', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', config.CORS_ORIGIN.join(', '));
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 // Routes
 app.use('/api/rooms', roomRoutes);
