@@ -1,6 +1,9 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
+// Use environment variable for socket URL, fallback to localhost for development
+const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 interface VoteData {
   userId: string;
   value: string;
@@ -88,7 +91,7 @@ export const useSocket = (roomId: string, userId: string, username: string): Use
     console.log('Setting up socket connection for room:', roomId, 'user:', userId, 'username:', username);
 
     // Create socket connection
-    const socket = io('http://localhost:3001', {
+    const socket = io(SOCKET_URL, {
       transports: ['websocket'],
       autoConnect: true,
     });

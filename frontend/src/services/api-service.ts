@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// Use environment variable for API URL, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 export interface CreateRoomData {
   name: string;
   description: string;
@@ -24,14 +27,13 @@ export interface RoomsResponse {
 }
 
 export const getRooms = async (): Promise<RoomListItem[]> => {
-  const response = await axios.get<RoomsResponse>('http://localhost:3001/api/rooms');
+  const response = await axios.get<RoomsResponse>(`${API_BASE_URL}/api/rooms`);
   return response.data.data;
 };
 
 export const createRoom = async (room: CreateRoomData) => {
-  const response = await axios.post('http://localhost:3001/api/rooms', room);
+  const response = await axios.post(`${API_BASE_URL}/api/rooms`, room);
   return response.data;
-
-  }
+};
 
 
