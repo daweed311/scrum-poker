@@ -4,7 +4,7 @@ import axios from "axios";
 const isDevelopment = import.meta.env.DEV;
 const API_BASE_URL = isDevelopment 
   ? 'http://localhost:3001' 
-  : 'https://scrum-poker-9c6i.onrender.com';
+  : ''; // Use relative URLs in production to leverage Netlify proxy
 
 export interface CreateRoomData {
   name: string;

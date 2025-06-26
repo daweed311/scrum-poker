@@ -164,7 +164,7 @@ Based on [Render's environment variables documentation](https://render.com/docs/
 - The frontend automatically detects the environment using `import.meta.env.DEV`
 - No manual environment variable setup required
 - Development: Uses `http://localhost:3001`
-- Production: Uses `https://scrum-poker-9c6i.onrender.com` (works with both Netlify and Render frontend)
+- Production: Uses relative URLs with Netlify proxy to avoid CORS issues
 
 ---
 

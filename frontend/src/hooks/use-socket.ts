@@ -5,7 +5,7 @@ import { io, Socket } from 'socket.io-client';
 const isDevelopment = import.meta.env.DEV;
 const SOCKET_URL = isDevelopment 
   ? 'http://localhost:3001' 
-  : 'https://scrum-poker-9c6i.onrender.com';
+  : ''; // Use relative URLs in production to leverage Netlify proxy
 
 interface VoteData {
   userId: string;
