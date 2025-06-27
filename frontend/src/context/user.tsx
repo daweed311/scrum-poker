@@ -36,7 +36,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       const savedUsername = localStorage.getItem(USERNAME_KEY);
       const savedUserId = localStorage.getItem(USER_ID_KEY);
       
-      console.log('🔍 Loading user data from localStorage:', { savedUsername, savedUserId });
       
       if (savedUsername) {
         setUsernameState(savedUsername);
@@ -51,7 +50,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   const setUsername = (newUsername: string) => {
-    console.log('💾 Saving username to localStorage:', newUsername);
     setUsernameState(newUsername);
     try {
       localStorage.setItem(USERNAME_KEY, newUsername);
@@ -61,7 +59,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const setUserId = (newUserId: string) => {
-    console.log('💾 Saving userId to localStorage:', newUserId);
     setUserIdState(newUserId);
     try {
       localStorage.setItem(USER_ID_KEY, newUserId);
@@ -71,7 +68,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const clearUser = () => {
-    console.log('🗑️ Clearing user data from localStorage');
     setUsernameState("");
     setUserIdState("");
     try {

@@ -32,7 +32,6 @@ export const RoomPage = () => {
   // Join room 
   useEffect(() => {
     if (isConnected && roomId && userId && username) {
-      console.log('joining room', roomId, userId, username);
       joinRoom(roomId, userId, username);
     }
   }, [isConnected, roomId, userId, username, joinRoom]);

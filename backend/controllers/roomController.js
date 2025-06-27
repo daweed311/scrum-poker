@@ -62,7 +62,6 @@ const createRoom = async (req, res) => {
 
 // Join an existing room
 const joinRoom = async (req, res) => {
-  console.log('ASDASD')
   try {
     const { roomId } = req.params;
     const { userId, username } = req.body;

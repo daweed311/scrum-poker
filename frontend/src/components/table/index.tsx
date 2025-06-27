@@ -20,7 +20,6 @@ interface TableProps {
 }
 
 export const Table = ({ votes, isRevealed, participants, currentUserId }: TableProps) => {
-  console.log('participants', participants);
   return (
     <TableContainer>
       <Seats 
