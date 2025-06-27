@@ -157,28 +157,66 @@ const setupSocketHandlers = (io) => {
         // Get fresh room data after casting vote
         const updatedRoom = await Room.findOne({ roomId });
 
+        // Check if all participants have voted
+        const allVoted = updatedRoom.allParticipantsVoted();
+
         // Notify other users that someone voted (but don't reveal the vote)
         socket.to(roomId).emit('votesUpdated', {
           userId,
           hasVoted: true,
           currentRound: updatedRoom.currentRound,
-          roundStats: updatedRoom.getRoundStats()
+          roundStats: updatedRoom.getRoundStats(),
+          allParticipantsVoted: allVoted
         });
 
         // Confirm vote to the user
         socket.emit('voteConfirmed', {
           userId,
           value,
-          currentRound: updatedRoom.currentRound
+          currentRound: updatedRoom.currentRound,
+          allParticipantsVoted: allVoted
         });
 
         console.log(`User ${userId} voted ${value} in round ${updatedRoom.currentRound} of room ${roomId}`);
+
+        // If all participants have voted, automatically reveal votes
+        if (allVoted) {
+          await revealVotesForRoom(io, roomId, updatedRoom);
+        }
 
       } catch (error) {
         console.error('Error casting vote:', error);
         socket.emit('error', { message: error.message || 'Failed to cast vote' });
       }
     });
+
+    // Helper function to reveal votes for a room
+    const revealVotesForRoom = async (io, roomId, room) => {
+      try {
+        // Reveal votes in current round
+        await room.revealVotes();
+
+        // Get fresh room data after revealing votes
+        const updatedRoom = await Room.findOne({ roomId });
+
+        // Get votes for current round
+        const votes = updatedRoom.getCurrentRoundVotes();
+
+        // Emit revealed votes to all users in the room
+        io.to(roomId).emit('votesRevealed', {
+          votes,
+          participants: updatedRoom.participants,
+          currentRound: updatedRoom.currentRound,
+          roundStats: updatedRoom.getRoundStats(),
+          autoRevealed: true
+        });
+
+        console.log(`Votes automatically revealed in round ${updatedRoom.currentRound} of room ${roomId} - all participants voted`);
+
+      } catch (error) {
+        console.error('Error auto-revealing votes:', error);
+      }
+    };
 
     // Reveal votes in current round
     socket.on('revealVotes', async (data) => {
@@ -203,24 +241,8 @@ const setupSocketHandlers = (io) => {
           return;
         }
 
-        // Reveal votes in current round
-        await room.revealVotes();
-
-        // Get fresh room data after revealing votes
-        const updatedRoom = await Room.findOne({ roomId });
-
-        // Get votes for current round
-        const votes = updatedRoom.getCurrentRoundVotes();
-
-        // Emit revealed votes to all users in the room
-        io.to(roomId).emit('votesRevealed', {
-          votes,
-          participants: updatedRoom.participants,
-          currentRound: updatedRoom.currentRound,
-          roundStats: updatedRoom.getRoundStats()
-        });
-
-        console.log(`Votes revealed in round ${updatedRoom.currentRound} of room ${roomId}`);
+        // Use the helper function to reveal votes
+        await revealVotesForRoom(io, roomId, room);
 
       } catch (error) {
         console.error('Error revealing votes:', error);

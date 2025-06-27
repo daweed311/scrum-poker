@@ -228,6 +228,25 @@ roomSchema.methods.castVote = function(userId, voteValue) {
   return this.save();
 };
 
+// Method to check if all participants have voted in current round
+roomSchema.methods.allParticipantsVoted = function() {
+  const currentRound = this.getCurrentRound();
+  
+  if (!currentRound) {
+    return false;
+  }
+  
+  if (currentRound.isRevealed) {
+    return false;
+  }
+  
+  // Get unique user IDs who have voted
+  const votedUserIds = [...new Set(currentRound.votes.map(vote => vote.userId))];
+  
+  // Check if all participants have voted
+  return this.participants.length > 0 && votedUserIds.length === this.participants.length;
+};
+
 // Method to reveal votes in current round
 roomSchema.methods.revealVotes = function() {
   const currentRound = this.getCurrentRound();
